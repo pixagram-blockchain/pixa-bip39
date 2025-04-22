@@ -1,0 +1,42 @@
+[package]
+name = "pixa_bip39"
+version = "0.0.2"
+edition = "2024"
+authors = ["Affolter Matias"]
+description = "WASM-ready BIP-39 mnemonic + base58 master key generator with brute-force resistance"
+license = "MIT OR Apache-2.0"
+
+[lib]
+crate-type = ["cdylib"]
+
+[dependencies]
+scrypt = "0.11"
+bs58 = "0.5"
+sha2 = "0.10"
+wasm-bindgen = "0.2.92"
+unicode-normalization = "0.1"
+
+[dependencies.bip39]
+version = "2.1"
+features = ["all-languages"] # enables all BIP-39 word lists
+
+[dependencies.getrandom]
+version = "0.2"
+features = ["js"]
+
+[dependencies.rand]
+version = "0.8"
+features = ["getrandom"]
+
+[features]
+default = []
+
+[profile.release]
+opt-level = "z"
+lto = true
+codegen-units = 1
+panic = "abort"
+
+[package.metadata.wasm-pack.profile.release]
+wasm-opt = true
+
