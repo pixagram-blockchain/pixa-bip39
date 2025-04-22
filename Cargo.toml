@@ -2,6 +2,7 @@
 name = "pixa_bip39"
 version = "0.0.2"
 edition = "2024"
+repository = "https://github.com/pixagram-blockchain/pixa-bip39"
 authors = ["Affolter Matias"]
 description = "WASM-ready BIP-39 mnemonic + base58 master key generator with brute-force resistance"
 license = "MIT OR Apache-2.0"
