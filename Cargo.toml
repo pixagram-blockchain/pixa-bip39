@@ -1,6 +1,6 @@
 [package]
 name = "pixa_bip39"
-version = "0.0.2"
+version = "0.0.5"
 edition = "2024"
 repository = "https://github.com/pixagram-blockchain/pixa-bip39"
 authors = ["Affolter Matias"]
@@ -11,14 +11,18 @@ license = "MIT OR Apache-2.0"
 crate-type = ["cdylib"]
 
 [dependencies]
-scrypt = "0.11"
+scrypt = "0.11.0"
 bs58 = "0.5"
-sha2 = "0.10"
+sha2 = "0.10.9"
 wasm-bindgen = "0.2.92"
+wasm-bindgen-futures = "0.4"
+js-sys = "0.3"
 unicode-normalization = "0.1"
+serde = { version = "1.0", features = ["derive"] }
+serde-wasm-bindgen = "0.6"
 
 [dependencies.bip39]
-version = "2.1"
+version = "2.2.0"
 features = ["all-languages"] # enables all BIP-39 word lists
 
 [dependencies.getrandom]
@@ -40,4 +44,3 @@ panic = "abort"
 
 [package.metadata.wasm-pack.profile.release]
 wasm-opt = true
-
