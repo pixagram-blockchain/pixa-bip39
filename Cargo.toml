@@ -1,6 +1,6 @@
 [package]
 name = "pixa_bip39"
-version = "0.0.6"
+version = "0.0.7"
 edition = "2024"
 repository = "https://github.com/pixagram-blockchain/pixa-bip39"
 authors = ["Affolter Matias"]
@@ -8,38 +8,19 @@ description = "WASM-ready BIP-39 mnemonic + base58 master key generator with bru
 license = "MIT OR Apache-2.0"
 
 [lib]
-crate-type = ["cdylib"]
+crate-type = ["cdylib", "rlib"]
 
 [dependencies]
-bs58 = "0.5"
-sha2 = "0.10.9"
-wasm-bindgen = "0.2.92"
+wasm-bindgen = "0.2"
 wasm-bindgen-futures = "0.4"
 js-sys = "0.3"
-serde = { version = "1.0", features = ["derive"] }
+serde = "1"
 serde-wasm-bindgen = "0.6"
-
-[dependencies.bip39]
-version = "2.2.0"
-features = ["all-languages"] # enables all BIP-39 word lists
-
-[dependencies.getrandom]
-version = "0.2"
-features = ["js"]
-
-[dependencies.rand]
-version = "0.8"
-features = ["getrandom"]
-
-[features]
-default = []
-
-[profile.release]
-opt-level = "z"
-lto = true
-codegen-units = 1
-panic = "abort"
-
-[package.metadata.wasm-pack.profile.release]
-wasm-opt = true
-
+bip39 = { version = "2", features = ["czech", "french", "italian", "japanese", "korean", "portuguese", "spanish"] }
+sha2 = "0.10"
+bs58 = "0.5"
+rand = "0.8"
+# `js` routes OsRng to crypto.getRandomValues on wasm32-unknown-unknown.
+# Without it the wasm build fails at compile time — there is no silent fallback.
+getrandom = { version = "0.2", features = ["js"] }
+zeroize = "1"
